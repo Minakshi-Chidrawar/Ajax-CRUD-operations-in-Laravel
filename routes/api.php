@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Person;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +18,13 @@ use Illuminate\Http\Request;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+// Route::get('/person', function(){
+//     $person = [
+//         'first_name' => 'Sean',
+//         'last_name' => 'Moon',
+//     ];
+
+//     return $person;
+// });
+Route::get('/person/{person}', 'PersonController@show');
