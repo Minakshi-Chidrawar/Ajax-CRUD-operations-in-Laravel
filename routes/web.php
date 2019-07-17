@@ -11,7 +11,6 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-Route::get('names', 'NameController@index');
+Route::get('/', function () {
+    return view('welcome');
+});
