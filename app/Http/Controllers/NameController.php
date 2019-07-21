@@ -14,7 +14,12 @@ class NameController extends Controller
      */
     public function index()
     {
-        //
+        $names = Name::all();
+
+        //dd($names);
+
+        //return view('welcome')->withData($names);
+        return view('welcome', compact('names'));
     }
 
     /**
