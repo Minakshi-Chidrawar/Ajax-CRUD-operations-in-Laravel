@@ -29,3 +29,5 @@ use Illuminate\Http\Request;
 // });
 // Route::get('/person/{person}', 'PersonController@show');
 Route::apiResource('/person', 'PersonController');
+//Route::get('/names', 'IndexController@readItems');
+Route::apiResource('/names', 'NameController');
