@@ -40,7 +40,22 @@ class NameController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = array(
+            'name' => 'required|alpha_num',
+        );
+        $validator = Validator::make(Input::all(), $rules);
+        if ($validator->fails()) {
+            return Response::json(array(
+
+                    'errors' => $validator->getMessageBag()->toArray(),
+            ));
+        } else {
+            $data = new Data();
+            $data->name = $request->name;
+            $data->save();
+
+            return response()->json($data);
+        }
     }
 
     /**
