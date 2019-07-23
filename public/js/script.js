@@ -18,7 +18,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'post',
-            url: '/store',
+            url: '/addItem',
             data: {
                 '_token': $('input[name=_token]').val(),
                 'name': $('input[name=name]').val()
