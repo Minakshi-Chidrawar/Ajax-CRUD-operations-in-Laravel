@@ -3,45 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Name;
+use Response;
+use Validator;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class NameController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $names = Name::all();
-
-        //dd($names);
-
-        //return view('welcome')->withData($names);
-        return view('welcome', compact('names'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $rules = array(
-            'name' => 'required|alpha_num',
+                'name' => 'required|alpha_num',
         );
         $validator = Validator::make(Input::all(), $rules);
         if ($validator->fails()) {
@@ -50,56 +22,24 @@ class NameController extends Controller
                     'errors' => $validator->getMessageBag()->toArray(),
             ));
         } else {
-            $data = new Data();
-            $data->name = $request->name;
-            $data->save();
+            $name = new Name();
+            $name->name = $request->name;
+            $name->save();
 
-            return response()->json($data);
+            return response()->json($name);
         }
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Name  $name
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Name $name)
+    public function index()
     {
-        //
+        $name = Name::all();
+
+        return view('welcome')->withData($name);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Name  $name
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Name $name)
+    public function destroy(Request $req)
     {
-        //
-    }
+        Name::find($req->id)->delete();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Name  $name
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Name $name)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Name  $name
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Name $name)
-    {
-        //
+        return response()->json();
     }
 }
