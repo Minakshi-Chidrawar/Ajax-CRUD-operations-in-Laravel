@@ -28,6 +28,9 @@ use Illuminate\Http\Request;
 //     return $person;
 // });
 // Route::get('/person/{person}', 'PersonController@show');
-Route::apiResource('/person', 'PersonController');
-//Route::get('/names', 'IndexController@readItems');
-Route::apiResource('/names', 'NameController');
+//Route::apiResource('/person', 'PersonController');
+
+Route::get('/', 'NameController@index');
+Route::post('addName', 'NameController@store');
+Route::post('deleteName', 'NameController@destroy');
+Route::get('selectWinner', 'NameController@show');
