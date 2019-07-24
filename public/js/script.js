@@ -18,7 +18,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'post',
-            url: '/addItem',
+            url: '/api/addName',
             data: {
                 '_token': $('input[name=_token]').val(),
                 'name': $('input[name=name]').val()
@@ -40,13 +40,31 @@ $(document).ready(function() {
     $('.modal-footer').on('click', '.delete', function() {
         $.ajax({
             type: 'post',
-            url: '/deleteItem',
+            url: '/api/deleteName',
             data: {
                 '_token': $('input[name=_token]').val(),
                 'id': $('.did').text()
             },
             success: function(data) {
                 $('.item' + $('.did').text()).remove();
+            }
+        });
+    });
+
+    $("#selectWinner").click(function() {
+
+        $.ajax({
+            type: 'get',
+            url: '/api/selectWinner',
+            data: {
+                '_token': $('input[name=_token]').val(),
+                'name': $('input[name=name]').val()
+            },
+            success: function(sels) {
+                // alert("Yes");
+                console.log(sels);
+                // $('tbody').html(sels);
+                $('#results').html(sels);
             }
         });
     });
