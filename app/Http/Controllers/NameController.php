@@ -36,6 +36,13 @@ class NameController extends Controller
         return view('welcome')->withData($name);
     }
 
+    public function show()
+    {
+        $data = Data::inRandomOrder()->take(5)->get();
+
+        return view('welcome')->with('results', $data);
+    }
+
     public function destroy(Request $req)
     {
         Name::find($req->id)->delete();
