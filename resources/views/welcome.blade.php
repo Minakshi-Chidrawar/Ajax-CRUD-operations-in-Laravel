@@ -65,14 +65,7 @@
 				 </div>
 				 <div class="col-md-3">
 					 <div id="results">
-						 <table class="table table-borderless" id="table">
-							 @foreach($data as $item)
-								 <tr class="item{{$item->id}}">
-								 <!-- <td>{{$item->id}}</td> -->
-									 <td>{{$item->name}}</td>
-								 </tr>
-							 @endforeach
-						 </table>
+
 					 </div>
 				 </div>
 			</div>
