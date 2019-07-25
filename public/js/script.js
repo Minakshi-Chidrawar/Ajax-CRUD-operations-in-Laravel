@@ -51,21 +51,25 @@ $(document).ready(function() {
         });
     });
 
-    $("#selectWinner").click(function() {
-
         $.ajax({
-            type: 'get',
+            type: 'POST',
             url: '/api/selectWinner',
             data: {
                 '_token': $('input[name=_token]').val(),
-                'name': $('input[name=name]').val()
+                'numberOfWinners': $('input[name=numberOfWinners]').val()
             },
-            success: function(sels) {
-                // alert("Yes");
-                console.log(sels);
-                // $('tbody').html(sels);
-                $('#results').html(sels);
+            success: function(Response) {
+                console.log("This is sels output", Response);
+                winners = '<p class="winnerStyle">Top winners are: </p>';
+                winners += '<table class="table table-borderless winnerStyle">';
+
+                $.each(Response, function(i){
+                    winners += '<tr><td>' + Response[i].name + '</td></tr>';
+                })
+                winners += '</table>';
+                $('#results').html(winners);
             }
         });
+        $('#numberOfWinners').val('');
     });
 });
