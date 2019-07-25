@@ -36,11 +36,11 @@ class NameController extends Controller
         return view('welcome')->withData($name);
     }
 
-    public function show()
+    public function show(Request $request)
     {
-        $data = Data::inRandomOrder()->take(5)->get();
+        $names = Data::inRandomOrder()->take($request->numberOfWinners)->get();
 
-        return view('welcome')->with('results', $data);
+        return response()->json($names);
     }
 
     public function destroy(Request $req)
