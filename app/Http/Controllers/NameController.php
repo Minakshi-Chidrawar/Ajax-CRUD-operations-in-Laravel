@@ -38,9 +38,20 @@ class NameController extends Controller
 
     public function show(Request $request)
     {
-        $names = Data::inRandomOrder()->take($request->numberOfWinners)->get();
+        $rules = array(
+            'numberOfWinners' => 'required|numeric',
+        );
+        $validator = Validator::make(Input::all(), $rules);
+        if ($validator->fails()) {
+            return Response::json(array(
 
-        return response()->json($names);
+                'errors' => $validator->getMessageBag()->toArray(),
+            ));
+        } else {
+            $names = Data::inRandomOrder()->take($request->numberOfWinners)->get();
+
+            return response()->json($names);
+        }
     }
 
     public function destroy(Request $req)
