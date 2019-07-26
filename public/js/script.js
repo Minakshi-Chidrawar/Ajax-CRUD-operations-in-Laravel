@@ -59,15 +59,22 @@ $(document).ready(function() {
                 'numberOfWinners': $('input[name=numberOfWinners]').val()
             },
             success: function(Response) {
-                console.log("This is sels output", Response);
-                winners = '<p class="winnerStyle">Top winners are: </p>';
-                winners += '<table class="table table-borderless winnerStyle">';
+                if ((Response.errors)){
+                    $('.error').removeClass('error text-center alert alert-danger test');
+                    $('.error').text(Response.errors.numberOfWinners);
+                }
+                else {
+                    $('.error').addClass('error text-center alert alert-danger test');
+                    console.log("This is sels output", Response);
+                    winners = '<p class="winnerStyle">Top winners are: </p>';
+                    winners += '<table class="table table-borderless winnerStyle">';
 
-                $.each(Response, function(i){
-                    winners += '<tr><td>' + Response[i].name + '</td></tr>';
-                })
-                winners += '</table>';
-                $('#results').html(winners);
+                    $.each(Response, function(i){
+                        winners += '<tr><td>' + Response[i].name + '</td></tr>';
+                    })
+                    winners += '</table>';
+                    $('#results').html(winners);
+                }
             }
         });
         $('#numberOfWinners').val('');
