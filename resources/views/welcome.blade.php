@@ -20,6 +20,12 @@
 			.margin-top {
 				margin-top: 50%;
 			}
+			.winnerStyle {
+				margin-top: 12px; font-weight: bolder; font-family: cursive; font-size: x-large;
+			}
+			.marginTopForwardButton {
+				margin-top: 10px;
+			}
 		</style>
     </head>
     <body>
@@ -57,10 +63,17 @@
 					</div>
 				 </div>
 				 <div class="col-md-3">
-					 <div class="table-responsive text-center margin-top">
-						 <button class="select-modal btn btn-primary" id="selectWinner">
-							 <span class="glyphicon glyphicon-forward"></span>
-						 </button>
+					 <div class="text-center margin-top">
+						 <div class="col-md-4">
+							 <input type="text" class="form-control" id="numberOfWinners" name="numberOfWinners"
+									required>
+							 <p class="test"></p>
+
+							 <button class="select-modal btn btn-primary marginTopForwardButton" id="selectWinner">
+								 <span class="glyphicon glyphicon-forward"></span>
+							 </button>
+						 </div>
+						 {{ csrf_field() }}
 					 </div>
 				 </div>
 				 <div class="col-md-3">
