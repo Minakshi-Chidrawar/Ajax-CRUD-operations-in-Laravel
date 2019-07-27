@@ -1,0 +1,42 @@
+body {
+    margin-top: 5%;
+}
+.margin-top {
+    margin-top: 50%;
+}
+.winnerStyle {
+    margin-top: 30%;
+    /*margin-left: -50%;*/
+}
+
+.fontElementsWinner {
+    font-family: cursive;
+    font-weight: bold;
+    font-size: x-large;
+    color: limegreen;
+}
+
+.fontHeaderWinner {
+    font-size: xx-large;
+    font-weight: bolder;
+    color: forestgreen;
+    font-family: cursive;
+}
+.marginTopForwardButton {
+    margin-top: 10px;
+}
+
+.selectWinnerError {
+    background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+    text-align: center;
+    padding: 15px;
+    margin-bottom: 22px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.container {
+    width: 90%;
+}
