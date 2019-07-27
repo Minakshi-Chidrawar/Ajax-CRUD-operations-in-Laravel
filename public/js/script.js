@@ -15,7 +15,8 @@ $(document).ready(function() {
     });
 
     $("#add").click(function() {
-
+        var test = this;
+        console.log($('input[name=name]').val());
         $.ajax({
             type: 'post',
             url: '/api/addName',
@@ -33,7 +34,6 @@ $(document).ready(function() {
                     $('#table').append("<tr class='item" + data.id + "'><td>" + data.name + "</td><td><button class='delete-modal btn btn-danger' data-id='" + data.id + "' data-name='" + data.name + "'><span class='glyphicon glyphicon-minus'></span></button></td></tr>");
                 }
             },
-
         });
         $('#name').val('');
     });
@@ -51,6 +51,10 @@ $(document).ready(function() {
         });
     });
 
+    $("#selectWinner").click(function() {
+        var buttonClickedID = this;
+        $('#errorSelectWinners').removeClass('selectWinnerError');
+        console.log($('input[name=numberOfWinners]').val());
         $.ajax({
             type: 'POST',
             url: '/api/selectWinner',
@@ -60,19 +64,20 @@ $(document).ready(function() {
             },
             success: function(Response) {
                 if ((Response.errors)){
-                    $('.error').removeClass('error text-center alert alert-danger test');
-                    $('.error').text(Response.errors.numberOfWinners);
+                    $('#errorSelectWinners').removeClass('hidden');
+                    $('#errorSelectWinners').addClass('selectWinnerError');
+                    $('#errorSelectWinners').html(Response.errors.numberOfWinners);
                 }
                 else {
-                    $('.error').addClass('error text-center alert alert-danger test');
+                    $('#errorSelectWinners').addClass('hidden');
                     console.log("This is sels output", Response);
-                    winners = '<p class="winnerStyle">Top winners are: </p>';
-                    winners += '<table class="table table-borderless winnerStyle">';
+                    winners = '<div class="winnerStyle table table-borderless fontHeaderWinner">Winners are: ';
+                    winners += '<table class="fontElementsWinner">';
 
                     $.each(Response, function(i){
                         winners += '<tr><td>' + Response[i].name + '</td></tr>';
                     })
-                    winners += '</table>';
+                    winners += '</table></div>';
                     $('#results').html(winners);
                 }
             }
